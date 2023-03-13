@@ -31,12 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'techspaces_app'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djongo',
 ]
 
 MIDDLEWARE = [
@@ -71,12 +73,16 @@ WSGI_APPLICATION = 'techspaces.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# https://docs.djangoproject.com/en/3.2/re, 'postgresql', 'sqlite3'f/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'techspaces_db',
+        'HOST': 'localhost',
+        'PORT': 27017,
+        'USERNAME': 'space_technology',
+        'PASSWORD': '<@2space_tech>',
     }
 }
 
