@@ -1,5 +1,5 @@
 /**
- * users: An array of the user IDs of the two users involved in the chat.
+ *users: An array of the user IDs of the two users involved in the chat.
  *messages: An array of message objects, each containing fields such as sender_id (the user ID of the message sender), 
  *timestamp (the time the message was sent), and content (the text content of the message).
  *last_active: The timestamp of when the chat was last active (i.e. when a message was sent or received).
