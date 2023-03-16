@@ -71,3 +71,4 @@ spaceSchema.index({coords: '2dsphere'});
 
 mongoose.model('Space', spaceSchema);
 
+module.exports = Space;
