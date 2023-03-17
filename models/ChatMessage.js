@@ -4,20 +4,20 @@ const chatMessageSchema = new mongoose.Schema({
   chatId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Chat',
-    required: true
+    required: true,
   },
   sender: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
   },
   message: {
     type: String,
-    required: true
+    required: true,
   },
   sentAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   }
 });
 

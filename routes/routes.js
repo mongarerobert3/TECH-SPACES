@@ -1,6 +1,6 @@
 import express from 'express';
-import spaceRouter from './routes/space-router';
-import chatRouter from './routes/chat-router';
+import spaceRouter from './space-router';
+import chatRouter from './chat-router';
 
 const router = express.Router();
 

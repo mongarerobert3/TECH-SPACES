@@ -1,7 +1,8 @@
 {
-  "name": "files_manager",
+  "name": "Tech_Spaces",
   "version": "1.0.0",
   "description": "<!DOCTYPE html> <html> <head> \t<meta charset=\"UTF-8\"> </head> <body> <h1>Tech Spaces</h1>",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "lint": "eslint",
@@ -15,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "bull": "^3.16.0",
     "chai-http": "^4.3.0",
     "cors": "^2.8.5",
