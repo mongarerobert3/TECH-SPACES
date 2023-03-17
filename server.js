@@ -1,3 +1,5 @@
+import initSocket from './socket'; // import the socket.js file
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -9,6 +11,10 @@ const { MONGODB_URI, PORT } = require('./config');
 const db = require('./db');
 
 const app = express();
+const server = http.createServer(app);
+
+// initialize socket connection
+initSocket(server);
 
 // Bodyparser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,6 +31,9 @@ mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err));
+
+//other server logic here
+const io = initSocket(server);
 
 // Initialize db
 db();

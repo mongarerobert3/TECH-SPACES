@@ -1,34 +1,13 @@
-const express = require('express');
+import express from 'express';
+import spaceRouter from './routes/space-router';
+import chatRouter from './routes/chat-router';
+
 const router = express.Router();
 
-const { Space, find } = require('./models/space');
+// Routes for TechSpaces API
+router.use('/spaces', spaceRouter);
 
-// GET all TechSpaces
-router.get('/spaces', async (req, res) => {
-  try {
-    const techSpaces = await find();
-    res.json(techSpaces);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
-});
+// Routes for Chat API
+router.use('/chat', chatRouter);
 
-// POST a new TechSpace
-router.post('/spaces', async (req, res) => {
-  try {
-    const { name, description, location } = req.body;
-    const space = new Space({
-      name,
-      description,
-      location,
-    });
-    await space.save();
-    res.json(space);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
-});
-
-module.exports = router;
+export default router;
