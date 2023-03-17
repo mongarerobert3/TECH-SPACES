@@ -8,7 +8,7 @@ import morgan from 'morgan';
 // import the http module
 import http from 'http';
 
-import routes from './routes/routes';
+import routes from './routes/routes.js';
 
 const { MONGODB_URI, PORT } = require('./config');
 const db = require('./db');
@@ -45,7 +45,7 @@ const io = initSocket(server);
 db();
 
 // Use routes
-app.use('/api', routes);
+app.use('/routes', routes);
 
 // Start server
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
