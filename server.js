@@ -1,14 +1,20 @@
-import initSocket from './socket'; // import the socket.js file
+import express from 'express';
+import mongoose from 'mongoose';
 
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const morgan = require('morgan');
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import morgan from 'morgan';
 
-const routes = require('./routes/routes');
+// import the http module
+import http from 'http';
+
+import routes from './routes/routes.js';
+
 const { MONGODB_URI, PORT } = require('./config');
 const db = require('./db');
+
+// import the initSocket function from socket.js
+const { initSocket } = require('./socket');
 
 const app = express();
 const server = http.createServer(app);
@@ -23,7 +29,7 @@ app.use(bodyParser.json());
 // CORS middleware
 app.use(cors());
 
-//morgan middleware
+// morgan middleware
 app.use(morgan('dev'));
 
 // Connect to MongoDB
@@ -32,14 +38,14 @@ mongoose
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err));
 
-//other server logic here
+// other server logic here
 const io = initSocket(server);
 
 // Initialize db
 db();
 
 // Use routes
-app.use('/api', routes);
+app.use('/routes', routes);
 
 // Start server
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
