@@ -10,11 +10,11 @@ import http from 'http';
 
 import routes from './routes/routes.js';
 
-const { MONGODB_URI, PORT } = require('./config');
-const db = require('./db');
+import { MONGODB_URI, PORT } from './config.js';
+import db from './db.js';
 
 // import the initSocket function from socket.js
-const { initSocket } = require('./socket');
+import { initSocket } from './socket.js';
 
 const app = express();
 const server = http.createServer(app);
@@ -32,12 +32,16 @@ app.use(cors());
 // morgan middleware
 app.use(morgan('dev'));
 
-// Connect to MongoDB
+/** 
+ * Connect to MongoDB
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err));
 
+ * */ 
+
+  
 // other server logic here
 const io = initSocket(server);
 
