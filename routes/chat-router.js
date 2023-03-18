@@ -1,7 +1,7 @@
 import express from 'express';
 import {
   getMessages, getMessageById, createMessage, updateMessage, deleteMessage,
-} from '../controllers/ChatController';
+} from '../controllers/ChatController.js';
 
 const router = express.Router();
 

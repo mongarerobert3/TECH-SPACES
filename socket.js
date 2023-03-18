@@ -1,9 +1,11 @@
-import socketIO from 'socket.io';
+import { Server as socketIO } from 'socket.io';
+
 import http from 'http';
-import ChatMessage from './models/chat-message';
+
+import ChatMessage from './models/ChatMessage.js';
 
 const initSocket = (server) => {
-  const io = socketIO(server);
+  const io = new socketIO(server);
 
   io.on('connection', (socket) => {
     console.log(`Socket connected: ${socket.id}`);
@@ -28,4 +30,4 @@ const initSocket = (server) => {
   return io;
 };
 
-export default initSocket;
+export { initSocket };
