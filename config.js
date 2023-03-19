@@ -1,15 +1,9 @@
-// MongoDB configuration
-export const MONGODB_URI = 'mongodb://localhost:27017/TECH_SPACES';
-
-// Server configuration
-export const PORT = 3000;
-
-// JWT configuration
-export const JWT_SECRET = 'your_jwt_secret_here';
-export const JWT_EXPIRATION = '1h';
-
-// Email configuration
-export const EMAIL_SERVICE = 'gmail';
-export const EMAIL_USERNAME = 'your_email_username_here';
-export const EMAIL_PASSWORD = 'your_email_password_here';
-export const EMAIL_FROM = 'your_email_from_here';
+export const MONGODB_URI = 'mongodb://localhost:27017/techSpaces';
+export const PORT = process.env.PORT || 5000;
+export const SESSION_SECRET = process.env.SESSION_SECRET || 'secret';
+export const AUTH_CONFIG = {
+  domain: 'dev-fu78t5pi0oxgadcn.us.auth0.com',
+  clientID: 'yTNY4ITHnUMaSn4mKPFSapRivJ6VMie5',
+  clientSecret: 'RxuCcXU6W_nkkO7dwqgPxJblQwwk72uz9qkcWeRz1YMzy9TppMZgMRbZ-deIXcld',
+  callbackURL: 'http://localhost:5000/api/auth/callback'
+};

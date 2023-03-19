@@ -49,7 +49,7 @@
      ref: 'Event',
    },
    friendRequestId: {
-    type: Schema.Types.ObjectId,
+    type: _Schema.Types.ObjectId,
     ref: 'FriendRequest',
    },
  });
