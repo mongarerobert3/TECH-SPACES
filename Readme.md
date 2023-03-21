@@ -10,7 +10,8 @@
 
 <h2>Technologies Used</h2>
 <ul>
-	<li>Python (Django)</li>
+	<li>JavaScript (Mongoose)</li>
+	<li>Express</li>
 	<li>MongoDB</li>
 	<li>Angular</li>
 </ul>
@@ -29,7 +30,7 @@
 
 	<li>Install the dependencies:</li>
 	<pre><code>cd techspaces/backend<br>
-pip install -r requirements.txt</code></pre>
+node install </code></pre>
 
 
 	<pre><code>cd techspaces/frontend<br>
@@ -38,7 +39,7 @@ npm install</code></pre>
 
 	<li>Start the backend server:</li>
 	<pre><code>cd techspaces/backend<br>
-python manage.py runserver</code></pre>
+npm run server.js</code></pre>
 
 
 	<li>Start the frontend server:</li>
@@ -46,7 +47,7 @@ python manage.py runserver</code></pre>
 </code></pre>
 
 
-	<li>Access the application at <a href="http://localhost:4200/">http://localhost:4200/</a></li>
+	<li>Access the application at <a href="http://localhost:<port>/">http://localhost:<port>/</a></li>
 </ol>
 
 <h2>Deploying to Production</h2>
