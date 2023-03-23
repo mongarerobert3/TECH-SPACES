@@ -1,17 +1,19 @@
 const mongoose = require('mongoose');
 const readLine = require('readline');
 
-let dbURL = 'mongodb://127.0.0.1/techSpaces';
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+
 if (process.env.NODE_ENV === 'production') {
   dbURL = process.env.DB_HOST || process.env.MONGODB_URI;
 }
+
 
 const connect = () => {
   setTimeout(() => mongoose.connect(dbURL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }), 1000);
 }
 
-mongoose.connection.on('connected to techSpace datatabase', () => {
-  console.log('connected');
+mongoose.connection.on('connected', () => {
+  console.log('connected  to techSpace database');
 });
 
 mongoose.connection.on('error', err => {
@@ -19,8 +21,8 @@ mongoose.connection.on('error', err => {
   return connect();
 });
 
-mongoose.connection.on('disconnected from techSpace database', () => {
-  console.log('disconnected');
+mongoose.connection.on('disconnected', () => {
+  console.log('disconnected from techSpace database');
 });
 
 if (process.platform === 'win32') {

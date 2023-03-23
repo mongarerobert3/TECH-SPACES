@@ -1,3 +1,4 @@
+require('dotenv').config()
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -6,6 +7,7 @@ const logger = require('morgan');
 const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
 require('./app_api/models/db');
+
 
 const indexRouter = require('./app_server/routes/index');
 const apiRouter = require('./app_api/routes/index');

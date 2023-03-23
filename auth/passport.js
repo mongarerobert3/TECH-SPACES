@@ -1,5 +1,10 @@
 import passport from 'passport';
 import Auth0Strategy from 'passport-auth0';
+import { Strategy as JwtStrategy } from 'passport-jwt';
+import { ExtractJwt } from 'passport-jwt';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Configure Passport to use Auth0
 const strategy = new Auth0Strategy(
@@ -25,16 +30,34 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-// Use the Auth0 strategy with passport
-passport.use(strategy);
+// Configure Passport to use JWT strategy
+passport.use(
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: process.env.JWT_SECRET,
+    },
+    function (jwt_payload, done) {
+      // This function is called when a user authenticates with JWT
+      // You can use this function to verify user data in the JWT payload and retrieve additional user data from your database
+      return done(null, jwt_payload);
+    }
+  )
+);
 
-// Define middleware to check if user is authenticated
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-
-  res.redirect('/login');
+// Define middleware to check if user is authenticated with JWT
+function ensureAuthenticatedWithJwt(req, res, next) {
+  passport.authenticate('jwt', { session: false }, (err, user, info) => {
+    if (err) return next(err);
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Unauthorized',
+      });
+    }
+    req.user = user;
+    next();
+  })(req, res, next);
 }
 
-export { ensureAuthenticated, passport };
+export { ensureAuthenticatedWithJwt, passport };

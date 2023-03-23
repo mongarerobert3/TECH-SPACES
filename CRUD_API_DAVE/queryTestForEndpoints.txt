@@ -13,7 +13,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"name": "Sample Space", "a
 Space Read endpoint.
 curl -X GET "http://localhost:3000/api/spaces/:spaceid"
 example.
-curl -X GET "http://localhost:3000/api/spaces/64188601a6fffb55be4b5bc6"
+curl -X GET "http://localhost:3000/api/spaces/64188601a6fffb55be4b5bc06"
 
 
 Space Update endpoint.
