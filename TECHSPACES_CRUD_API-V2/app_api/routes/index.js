@@ -33,6 +33,32 @@ const {
   usersDeleteOne,
 } = require('../controllers/users');
 
+const {
+  allNotifications,
+  createNotification,
+  updateNotification,
+  deleteNotification
+} = require ('../controllers/NotificationController')
+
+const {
+  getMessages,
+  createMessage,
+  updateMessage,
+  deleteMessage,
+} = require('../controllers/ChatController.js');
+
+const {
+  createDeveloperReview,
+  getDeveloperReview,
+} = require ('../controllers/developerController')
+
+const {
+  createEventReview,
+  updateEventRating,
+} = require ('../controllers/EventReviewController')
+
+const { default: DeveloperReview } = require('../models/developer-review');
+
 const router = express.Router();
 const auth = (req, res, next) => {
   if (req.headers.authorization) {
@@ -99,5 +125,43 @@ router
   .get(usersReadOne)
   .put(auth, usersUpdateOne)
   .delete(auth, usersDeleteOne);
+
+//Notifications
+router
+  .route('/user/:userid/notifications')
+  .get(allNotifications)
+
+router
+  .route('/user/:userid/notifications/:notificationid')
+  .post(createNotification)
+  .put(updateNotification)
+  .delete(deleteNotification);
+
+
+//Chat
+router
+  .route('/user/:userid/chats')
+  .get(getMessages)
+
+router
+  .route('/user/:userid/chats/:chatid')
+  .post(createMessage)
+  .put(updateMessage)
+  .delete(deleteMessage);
+
+//Developer review
+router
+  .route('/user/:userid/reviews')
+  .post(createDeveloperReview)
+  .get(getDeveloperReview)
+
+// Event controller
+router
+  .route('/events/:eventid/review')
+  .post ( createEventReview,)
+
+router
+  .route('/events/:eventid')
+  .put(updateEventRating)
 
 module.exports = router;

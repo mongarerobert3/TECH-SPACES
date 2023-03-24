@@ -58,4 +58,7 @@ connect();
 require('./spaces.js');
 require('./events.js');
 require('./users.js');
-
+require('./ChatMessage');
+require('./developer-review');
+require('./event-review')
+require('./notifications')
