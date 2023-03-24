@@ -19,6 +19,7 @@ const register = async (req, res) => {
     const token = user.generateJwt();
     res.status(200).json({ token });
   } catch (err) {
+    console.error(err.message);
     res.status(400).json(err);
   }
 };

@@ -33,6 +33,32 @@ const {
   usersDeleteOne,
 } = require('../controllers/users');
 
+const {
+  allNotifications,
+  createNotification,
+  updateNotification,
+  deleteNotification
+} = require ('../controllers/NotificationController')
+
+const {
+  getMessages,
+  createMessage,
+  updateMessage,
+  deleteMessage,
+} = require('../controllers/ChatController.js');
+
+const {
+  createDeveloperReview,
+  getDeveloperReview,
+} = require ('../controllers/developerController')
+
+const {
+  createEventReview,
+  updateEventRating,
+} = require ('../controllers/EventReviewController')
+
+const { default: DeveloperReview } = require('../models/developer-review');
+
 const router = express.Router();
 const auth = (req, res, next) => {
   if (req.headers.authorization) {
@@ -54,36 +80,36 @@ const auth = (req, res, next) => {
 router
   .route('/spaces')
   .get(spacesListByDistance)
-  .post(auth, spacesCreate);
+  .post( spacesCreate);
 
 router
   .route('/spaces/:spaceid')
   .get(spacesReadOne)
-  .put(auth, spacesUpdateOne)
-  .delete(auth, spacesDeleteOne);
+  .put( spacesUpdateOne)
+  .delete( spacesDeleteOne);
 
 // reviews
 router
   .route('/spaces/:spaceid/reviews')
-  .post(auth, reviewsCreate);
+  .post( reviewsCreate);
 
 router
   .route('/spaces/:spaceid/reviews/:reviewid')
   .get(reviewsReadOne)
-  .put(auth, reviewsUpdateOne)
-  .delete(auth, reviewsDeleteOne);
+  .put( reviewsUpdateOne)
+  .delete( reviewsDeleteOne);
 
 // events
 router
   .route('/events')
   .get(eventsList)
-  .post(auth, eventsCreateOne);
+  .post( eventsCreateOne);
 
 router
   .route('/events/:eventid')
   .get(eventsReadOne)
-  .put(auth, eventsUpdateOne)
-  .delete(auth, eventsDeleteOne);
+  .put( eventsUpdateOne)
+  .delete( eventsDeleteOne);
 
 // auth
 router.post('/register', register);
@@ -97,7 +123,45 @@ router
 router
   .route('/users/:userid')
   .get(usersReadOne)
-  .put(auth, usersUpdateOne)
-  .delete(auth, usersDeleteOne);
+  .put( usersUpdateOne)
+  .delete( usersDeleteOne);
+
+//Notifications
+router
+  .route('/user/:userid/notifications')
+  .get(allNotifications)
+
+router
+  .route('/user/:userid/notifications/:notificationid')
+  .post(createNotification)
+  .put(updateNotification)
+  .delete(deleteNotification);
+
+
+//Chat
+router
+  .route('/user/:userid/chats')
+  .get(getMessages)
+
+router
+  .route('/user/:userid/chats/:chatid')
+  .post(createMessage)
+  .put(updateMessage)
+  .delete(deleteMessage);
+
+//Developer review
+router
+  .route('/user/:userid/reviews')
+  .post(createDeveloperReview)
+  .get(getDeveloperReview)
+
+// Event controller
+router
+  .route('/events/:eventid/review')
+  .post ( createEventReview,)
+
+router
+  .route('/events/:eventid')
+  .put(updateEventRating)
 
 module.exports = router;
