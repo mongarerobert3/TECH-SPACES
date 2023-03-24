@@ -80,36 +80,36 @@ const auth = (req, res, next) => {
 router
   .route('/spaces')
   .get(spacesListByDistance)
-  .post(auth, spacesCreate);
+  .post( spacesCreate);
 
 router
   .route('/spaces/:spaceid')
   .get(spacesReadOne)
-  .put(auth, spacesUpdateOne)
-  .delete(auth, spacesDeleteOne);
+  .put( spacesUpdateOne)
+  .delete( spacesDeleteOne);
 
 // reviews
 router
   .route('/spaces/:spaceid/reviews')
-  .post(auth, reviewsCreate);
+  .post( reviewsCreate);
 
 router
   .route('/spaces/:spaceid/reviews/:reviewid')
   .get(reviewsReadOne)
-  .put(auth, reviewsUpdateOne)
-  .delete(auth, reviewsDeleteOne);
+  .put( reviewsUpdateOne)
+  .delete( reviewsDeleteOne);
 
 // events
 router
   .route('/events')
   .get(eventsList)
-  .post(auth, eventsCreateOne);
+  .post( eventsCreateOne);
 
 router
   .route('/events/:eventid')
   .get(eventsReadOne)
-  .put(auth, eventsUpdateOne)
-  .delete(auth, eventsDeleteOne);
+  .put( eventsUpdateOne)
+  .delete( eventsDeleteOne);
 
 // auth
 router.post('/register', register);
@@ -123,8 +123,8 @@ router
 router
   .route('/users/:userid')
   .get(usersReadOne)
-  .put(auth, usersUpdateOne)
-  .delete(auth, usersDeleteOne);
+  .put( usersUpdateOne)
+  .delete( usersDeleteOne);
 
 //Notifications
 router

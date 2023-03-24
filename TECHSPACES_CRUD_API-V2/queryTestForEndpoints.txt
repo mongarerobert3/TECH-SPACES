@@ -79,6 +79,7 @@ USER
 
 /register
 curl -X POST "http://localhost:3000/api/register" -H "Content-Type: application/x-www-form-urlencoded" -d "name=david&email=davidomotari@gmail.com&password=Welcome12345"
+curl -X POST "http://localhost:3000/api/register" -H "Content-Type: application/x-www-form-urlencoded" -d "name=Robert&email=mongarerobert3@gmail.com&password=Karibu12345"
 
 /login
 curl -X POST "http://localhost:3000/api/login" -H "Content-Type: application/x-www-form-urlencoded" -d "email=davidomotari@gmail.com&password=Welcome12345"
