@@ -17,7 +17,7 @@
 </ul>
 <h2>Contributors</h2>
 <ul>
-	<li>Yvonne Charawe (Frontend Engineer) - yvonnecharawe@gmail.com</li>
+	<li>Yvonne C.W. (Frontend Engineer) - charawey@gmail.com</li>
 	<li>Robert Mongare (Backend Engineer) - mongarerobert3@gmail.com</li>
 	<li>David Motari (Backend Engineer) - davemotari22@gmail.com</li>
 </ul>
