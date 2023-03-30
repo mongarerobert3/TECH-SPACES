@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Event = mongoose.model('Events');
+const Event = mongoose.model('Event');
 
 // Get all events
 const eventsList = async (req, res) => {
@@ -31,7 +31,10 @@ const eventsReadOne =  async (req, res) => {
 
 // Create a new event
 const eventsCreateOne = async (req, res) => {
-  const { title, description, date, start_time, end_time, location, max_attendees, created_at } = req.body;
+  const { title, description, date, start_time, end_time, location, max_attendees = 0, created_at } = req.body;
+  if (max_attendees < 0) {
+    return res.status(400).json({ msg: "Max attendees must be a non-negative value." });
+  }
   try {
     const event = new Event({ title, description, date, start_time, end_time, location, max_attendees, created_at });
     await event.save();
@@ -42,9 +45,14 @@ const eventsCreateOne = async (req, res) => {
   }
 };
 
+
+
 // Update an event by ID
 const eventsUpdateOne = async (req, res) => {
-  const { title, description, date, start_time, end_time, location, max_attendees, created_at } = req.body;
+  const { title, description, date, start_time, end_time, location, max_attendees } = req.body;
+  if (max_attendees < 0) {
+    return res.status(400).json({ msg: "Max attendees must be a non-negative value." });
+  }
   try {
     let event = await Event.findById(req.params.eventid);
     if (!event) {
@@ -57,7 +65,6 @@ const eventsUpdateOne = async (req, res) => {
     event.end_time = end_time || event.end_time;
     event.location = location || event.location;
     event.max_attendees = max_attendees || event.max_attendees;
-    event.created_at = created_at|| event.created_at;
     event.updated_at = Date.now();
     await event.save();
     res.json(event);

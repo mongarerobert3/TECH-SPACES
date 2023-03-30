@@ -33,6 +33,7 @@ const {
   usersDeleteOne,
 } = require('../controllers/users');
 
+
 const {
   allNotifications,
   createNotification,
@@ -55,9 +56,17 @@ const {
 const {
   createEventReview,
   updateEventRating,
-} = require ('../controllers/EventReviewController')
+} = require ('../controllers/EventReviewController');
 
 const { default: DeveloperReview } = require('../models/developer-review');
+
+const {
+  getBookingsForEvent,
+  cancelBooking,
+  createBooking,
+  updateBooking,
+  getBookingsForUser
+} = require('../controllers/eventsBooking')
 
 const router = express.Router();
 const auth = (req, res, next) => {
@@ -126,6 +135,10 @@ router
   .put( usersUpdateOne)
   .delete( usersDeleteOne);
 
+router
+  .route('/users/:userid/bookings')
+  .get(getBookingsForUser);
+  
 //Notifications
 router
   .route('/user/:userid/notifications')
@@ -163,5 +176,17 @@ router
 router
   .route('/events/:eventid')
   .put(updateEventRating)
+
+// Booking
+router
+  .route('/events/:eventid/bookings')
+  .get(getBookingsForEvent)
+router
+  .route('/events/:eventid/bookings/:userid')
+  .post(createBooking)
+router
+  .route('/events/:eventid/bookings/:bookingid')
+  .put(updateBooking)
+  .delete(cancelBooking)
 
 module.exports = router;
