@@ -1,0 +1,17 @@
+
+
+.hubs > div {
+  display: flex;
+  flex: 0.5;
+  align-self: stretch;
+}
+
+.box {
+  display:flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 1em;
+  padding: 2em;
+  border-radius: 20px;
+  transition: 1s;
+}
