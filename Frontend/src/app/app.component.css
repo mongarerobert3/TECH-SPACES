@@ -224,6 +224,12 @@ section #logo {
   text-align: center;
 }
 
+.users, .hubs {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
 @media (min-width: 824px) {
   #p1 .hint {
     font-size:1.5rem;
