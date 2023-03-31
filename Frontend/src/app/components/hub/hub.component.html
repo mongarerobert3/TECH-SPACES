@@ -2,11 +2,11 @@
   <div *ngFor='let hub of hubs;let i = index;'>
     <div class="box">
       <h3>{{ hub.name }}</h3>
-      <div class="facility">
-        <div *ngFor="let facility in hub.facilities">
+      <!-- <div class="facility">
+        <div *ngFor="let facility of hub[]">
           <p>{{ facility }}</p>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
