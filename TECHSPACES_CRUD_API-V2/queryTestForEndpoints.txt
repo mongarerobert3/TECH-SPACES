@@ -1,0 +1,96 @@
+Test for space endpoints.
+
+Space GET SpaceListBy Distance:
+curl -X GET "http://localhost:3000/api/spaces?lng=<current_lng>&lat=<current_lat>"
+example
+curl -X GET "http://localhost:3000/api/spaces?lng=-74.00600219484188&lat=40.71282118482013"
+
+Space Create endpoint.
+curl -X POST -H "Content-Type: application/json" -d '{}' "http://localhost:3000/api/spaces"
+example.
+curl -X POST -H "Content-Type: application/json" -d '{"name": "Sample Space", "address": "123 Main Street", "facilities": "Wi-Fi, Parking, Restrooms", "lat": 40.7128, "lng": -74.0060, "days1": "Monday - Friday", "opening1": "09:00", "closing1": "17:00", "closed1": false, "days2": "Saturday", "opening2": "10:00", "closing2": "14:00", "closed2": true}' "http://localhost:3000/api/spaces"
+
+Space Read endpoint.
+curl -X GET "http://localhost:3000/api/spaces/:spaceid"
+example.
+curl -X GET "http://localhost:3000/api/spaces/64188601a6fffb55be4b5bc6"
+
+
+Space Update endpoint.
+curl -X PUT "http://localhost:3000/api/spaces/:spaceid" -H "Content-Type: application/json" -d {} 
+example:
+curl -X PUT "http://localhost:3000/api/spaces/64188601a6fffb55be4b5bc6" -H "Content-Type: application/json" -d '{"name": "Lavintos"}'
+
+Space Delete endpoint.
+curl -X DELETE "http://localhost:3000/api/spaces/:spaceid"
+example:
+curl -X DELETE "http://localhost:3000/api/spaces/64188601a6fffb55be4b5bc6"
+
+
+Test for review endpoints.
+
+Review Create for Space.
+curl -X POST -H "Content-Type: application/json" "http://localhost:3000/api/spaces/:spaceid/reviews" -d {}
+example: curl -X POST -H "Content-Type: application/json" "http://localhost:3000/api/spaces/:spaceid/reviews" -d '{"author": "dave motari", "rating": 4, "reviewText": "What a lovely place, enjoyed working here"}'
+
+Review Read for one .
+curl -X GET "http://localhost:3000/api/spaces/:spaceid/reviews/:reviewid"
+example
+curl -X GET "http://localhost:3000/api/spaces/64192f01066311125531d00e/reviews/6419379a066311125531d016"
+
+Review Update one.
+curl -X PUT "http://localhost:3000/api/spaces/:spaceid/reviews/:reviewid" -H "Content-Type: application/json" -d '{}'
+
+curl -X PUT "http://localhost:3000/api/spaces/64192f01066311125531d00e/reviews/6419379a066311125531d016" -H "Content-Type: application/json" -d '{"rating": 5}'
+
+Review Delete one.
+curl -X DELETE "http://localhost:3000/api/spaces/:spaceid/reviews/:reviewid"
+example
+curl -X DELETE "http://localhost:3000/api/spaces/64192f01066311125531d00e/reviews/64193935066311125531d020"
+
+Events endpoints tests:
+
+GET list of event:
+curl http://localhost:3000/api/events
+
+POST an event:
+curl -X POST -H "Content-Type: application/json" -d '{"title": "My Event", "description": "This is a description of my event", "date": "2023-04-15", "start_time": "09:00 AM", "end_time": "12:00 PM", "location": "123 Main St, Anytown USA", "max_attendees": 50}' http://localhost:3000/api/events
+
+GET an event:
+curl -X GET "http://localhost:3000/api/events/:eventid"
+
+example: curl -X GET "http://localhost:3000/api/events/6418c5c7b24a8c6ffebb2713"
+
+UPDATE an event:
+
+curl -X PUT "http://localhost:3000/api/events/:eventid" -H "Content-Type: application/json" -d {}
+
+example: curl -X PUT "http://localhost:3000/api/events/6418c6f4b24a8c6ffebb2717" -H "Content-Type: application/json" -d '{"title": "JSHacks"}'
+
+
+DELETE an event:
+
+curl -X DELETE "http://localhost:3000/api/events/:eventid"
+
+example: curl -X DELETE "http://localhost:3000/api/events/6418c5c7b24a8c6ffebb2713"
+
+
+USER
+
+/register
+curl -X POST "http://localhost:3000/api/register" -H "Content-Type: application/x-www-form-urlencoded" -d "name=david&email=davidomotari@gmail.com&password=Welcome12345"
+curl -X POST "http://localhost:3000/api/register" -H "Content-Type: application/x-www-form-urlencoded" -d "name=Robert&email=mongarerobert3@gmail.com&password=Karibu12345"
+
+/login
+curl -X POST "http://localhost:3000/api/login" -H "Content-Type: application/x-www-form-urlencoded" -d "email=davidomotari@gmail.com&password=Welcome12345"
+READALL
+/users
+curl -X GET "http://localhost:3000/api/users"
+READ ONE
+/user/:userid
+curl -X GET "http://localhost:3000/api/users/6419ae16caaedc31e5b136a8"
+
+/user/:userid
+curl -X PUT http://localhost:3000/api/users/:userid -H 'Content-Type: application/json' -d '{"email": "johndoe@example.com", "name": "John Doe", "bio": "A software developer", "skills": ["JavaScript", "Node.js"], "location": "San Francisco", "avatar": "https://example.com/avatar.jpg"}'
+
+
