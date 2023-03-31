@@ -1,0 +1,9 @@
+<div class="users">
+  <div *ngFor='let user of users;let i = index;'>
+    <div class="box">
+      <img src={{user.avatar}}/>
+      <h3>{{ user.name }}</h3>
+      <p {{user.location}}></p>
+    </div>
+  </div>
+</div>
