@@ -1,0 +1,31 @@
+{
+  "name": "tech-spaces",
+  "version": "1.0.0",
+  "description": "An app that connects like minded devs",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon backend/app.js",
+    "server": "node backend/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mongarerobert3/TECH-SPACES.git"
+  },
+  "author": "Robert, David",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mongarerobert3/TECH-SPACES/issues"
+  },
+  "homepage": "https://github.com/mongarerobert3/TECH-SPACES#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.1.0",
+    "nodemon": "^2.0.22",
+    "socket.io": "^4.6.1"
+  }
+}

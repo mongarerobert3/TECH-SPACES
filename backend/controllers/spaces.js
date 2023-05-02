@@ -165,15 +165,19 @@ const spacesSearch = expressAsyncHandler(async (req, res) => {
 const spacesReadOne = expressAsyncHandler(async (req, res) => {
 
   try {
-    const space = await Space.findById(req.params._id);
- 
+    const spaceId = req.params.spaceid;
+
+    console.log(req.params.spaceid);
+
+    const space = await Space.findById(spaceId);
+
     if(!space) {
       res.status(404);
       throw new Error("Space not found");
     }
 
     console.log("Finished executing spacesReadOne function");
-    res.status(200);
+    res.json(space);
 
   } catch (error) {
     console.log("Error in spacesReadOne function: ", error);

@@ -1,5 +1,4 @@
 const expressAsyncHandler = require("express-async-handler");
-const Review = require("../models/reviewSchema");
 const Space = require("../models/spaces");
 
 /**const getAuthor = (async (req)) => {
@@ -50,8 +49,8 @@ const doAddReview = async (req, res, space) => {
     return res.status(404).json({ message: 'space not found' });
   }
 // change by removin author
-  const { author, rating, reviewText } = req.body;
-  space.reviews.push({ author, rating, reviewText });
+  const { author, rating, comment } = req.body;
+  space.reviews.push({ author, rating, comment });
   try {
     await space.save();
     await updateAverageRating(space._id);
@@ -74,21 +73,19 @@ const reviewsCreate = expressAsyncHandler(async (req, res) => {
       return res.status(404).json({ message: 'space not found' });
     }
 
-    const rating = req.body.rating;
       
-    const review = new Review({
-      user: req.user._id,
-      text,
-      rating,
-      space: space._id,
-    });
+    const review = {
+      author: req.user.name,
+      rating: req.body.rating,
+      comment: req.body.comment,
+      createdOn: Date.now(),
+    };
 
-    await review.save();
+    space.reviews.push(review);
 
     await space.save();
 
-    res.status(201).json({ message: 'Review added successfully' });
-
+    res.status(201).json(review);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server Error' });
@@ -141,7 +138,7 @@ if (!thisReview) {
 
 thisReview.author = req.body.author;
 thisReview.rating = req.body.rating;
-thisReview.reviewText = req.body.reviewText;
+thisReview.comment = req.body.comment;
 await space.save();
 
 updateAverageRating(space._id);

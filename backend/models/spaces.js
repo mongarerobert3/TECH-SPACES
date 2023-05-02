@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const reviewSchema = require('./reviewSchema');
 
 const openingTimesSchema = new mongoose.Schema({
   days: String,
@@ -8,15 +7,15 @@ const openingTimesSchema = new mongoose.Schema({
   closed: Boolean,
 });
 
-const imageSchema = new mongoose.Schema({
-  url: {
-    type: String,
+const reviewSchema = new mongoose.Schema({
+  author: String,
+  rating: {
+    type: Number,
     required: true,
+    min: 0,
+    max: 5,
   },
-  caption: {
-    type: String,
-    default: "",
-  },
+  comment: String,
   createdOn: {
     type: Date,
     default: Date.now,
@@ -28,9 +27,12 @@ const spaceSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  address: {
-    type:String, 
-    unique: true
+  address: String,
+  rating: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 5,
   },
   facilities: [String],
   coords: {
@@ -44,18 +46,20 @@ const spaceSchema = new mongoose.Schema({
   },
   openingTimes: [openingTimesSchema],
   reviews: [reviewSchema],
-  images: [imageSchema],
 });
-
-spaceSchema.methods.calculateAverageRating = function () {
-  const totalRatings = this.ratings.reduce((acc, curr) => acc + curr, 0);
-  const averageRating = totalRatings / this.ratings.length;
-  this.rating = averageRating;
-  return averageRating;
-}
 
 spaceSchema.index({ coords: '2dsphere' });
 
-mongoose.model('Space', spaceSchema);
+spaceSchema.methods.calculateAverageRating = function() {
+  let totalRating = 0;
+  if (this.reviews && this.reviews.length > 0) {
+    this.reviews.forEach(review => {
+      totalRating += review.rating;
+    });
+    this.rating = Math.round((totalRating / this.reviews.length) * 10) / 10;
+  } else {
+    this.rating = 0;
+  }
+};
 
 module.exports = mongoose.model('Space', spaceSchema);
